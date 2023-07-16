@@ -1,33 +1,39 @@
 package com.codedev.room_lib._di
 
 import android.content.Context
-import androidx.room.Room
-import com.codedev.room_lib.MediaDatabase
-import com.codedev.room_lib.dao.QueryDao
-import com.codedev.room_lib.dao.VideoDao
+import com.codedev.room_lib.DictionaryDatabase
+import com.codedev.room_lib.dao.DefinitionDao
+import com.codedev.room_lib.dao.MeaningDao
+import com.codedev.room_lib.dao.PhoneticDao
+import com.codedev.room_lib.dao.WordDao
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 @Module
 object RoomModule {
 
     @Provides
-    fun provideMediaDatabase(context: Context): MediaDatabase {
-        return Room.databaseBuilder(
-            context,
-            MediaDatabase::class.java,
-            "media_database"
-        ).build()
+    fun provideMediaDatabase(context: Context): DictionaryDatabase {
+        return DictionaryDatabase.getInstance(context)
     }
 
     @Provides
-    fun provideVideoDao(database: MediaDatabase): VideoDao {
-        return database.getVideoDao()
+    fun provideWordDao(database: DictionaryDatabase): WordDao {
+        return database.getWordDao()
     }
 
     @Provides
-    fun provideQueryDao(database: MediaDatabase): QueryDao {
-        return database.getQueryDao()
+    fun providePhoneticDao(database: DictionaryDatabase): PhoneticDao {
+        return database.getPhoneticDao()
+    }
+
+    @Provides
+    fun provideMeaningDao(database: DictionaryDatabase): MeaningDao {
+        return database.getMeaningDao()
+    }
+
+    @Provides
+    fun provideDefinitionDao(database: DictionaryDatabase): DefinitionDao {
+        return database.getDefinitionDao()
     }
 }

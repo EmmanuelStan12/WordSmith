@@ -18,6 +18,8 @@ object Dependencies {
 
     val kce_version = "1.3.1"
 
+    const val shimmer = "com.facebook.shimmer:shimmer:0.5.0"
+
     private val compose_v = "1.3.1"
     val composeui = "androidx.compose.ui:ui:$compose_v"
     val composeactivity = "androidx.activity:activity-compose:$compose_v"
@@ -123,60 +125,7 @@ object Dependencies {
     val fragment = "androidx.fragment:fragment:1.5.5"
     val fragment_testing = "androidx.fragment:fragment-testing:1.5.5"
 
-    val media3_version = "1.0.2"
-
-    // For media playback using ExoPlayer
-    val media3_player = "androidx.media3:media3-exoplayer:$media3_version"
-
-    // For DASH playback support with ExoPlayer
-    val media3_dash = "androidx.media3:media3-exoplayer-dash:$media3_version"
-    // For HLS playback support with ExoPlayer
-    val media3_hls = "androidx.media3:media3-exoplayer-hls:$media3_version"
-    // For RTSP playback support with ExoPlayer
-    val media3_rtsp = "androidx.media3:media3-exoplayer-rtsp:$media3_version"
-    // For ad insertion using the Interactive Media Ads SDK with ExoPlayer
-    val media3_ad = "androidx.media3:media3-exoplayer-ima:$media3_version"
-
-    // For loading data using the Cronet network stack
-    val media3_cronet = "androidx.media3:media3-datasource-cronet:$media3_version"
-    // For loading data using the OkHttp network stack
-    val media3_okhttp = "androidx.media3:media3-datasource-okhttp:$media3_version"
-    // For loading data using librtmp
-    val media3_librtmp = "androidx.media3:media3-datasource-rtmp:$media3_version"
-
-    // For building media playback UIs
-    val media3_ui = "androidx.media3:media3-ui:$media3_version"
-    // For building media playback UIs for Android TV using the Jetpack Leanback library
-    val media3_tv_ui = "androidx.media3:media3-ui-leanback:$media3_version"
-
-    // For exposing and controlling media sessions
-    val media3_session = "androidx.media3:media3-session:$media3_version"
-
-    // For extracting data from media containers
-    val media3_extractor = "androidx.media3:media3-extractor:$media3_version"
-
-    // For integrating with Cast
-    val media3_cast = "androidx.media3:media3-cast:$media3_version"
-
-    // For scheduling background operations using Jetpack Work's WorkManager with ExoPlayer
-    val media3_workmanager = "androidx.media3:media3-exoplayer-workmanager:$media3_version"
-
-    // For transforming media files
-    val media3_transform = "androidx.media3:media3-transformer:$media3_version"
-
-    // Utilities for testing media components (including ExoPlayer components)
-    val media3_test_utils = "androidx.media3:media3-test-utils:$media3_version"
-    // Utilities for testing media components (including ExoPlayer components) via Robolectric
-    val media3_roboelectric = "androidx.media3:media3-test-utils-robolectric:$media3_version"
-
-    // Common functionality for media database components
-    val media3_database = "androidx.media3:media3-database:$media3_version"
-    // Common functionality for media decoders
-    val media3_decoder = "androidx.media3:media3-decoder:$media3_version"
-    // Common functionality for loading data
-    val media3_datasource = "androidx.media3:media3-datasource:$media3_version"
-    // Common functionality used across multiple media libraries
-    val media3_common = "androidx.media3:media3-common:$media3_version"
+    val datastore = "androidx.datastore:datastore-preferences:1.0.0"
 
     val appLibraries: ArrayList<String> = arrayListOf<String>().apply {
         add(core)

@@ -1,22 +1,241 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeFragment">
+    >
 
-    <TextView
-        android:id="@+id/text_home"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:background="@color/color_primary"
+        android:paddingTop="16dp">
+
+        <FrameLayout
+            android:id="@+id/fl_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:paddingBottom="32dp"
+            android:background="@drawable/background_pink_start_curved"
+            >
+
+            <AutoCompleteTextView
+                android:id="@+id/et_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginHorizontal="16dp"
+                android:background="@drawable/background_search_edit_text"
+                android:drawableStart="@drawable/ic_search"
+                android:drawableTint="@color/color_GreyText"
+                android:drawablePadding="8dp"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="16dp"
+                android:hint="Search..."
+                android:fontFamily="@font/roboto_medium"
+                />
+
+        </FrameLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fl_header"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:clipToPadding="false"
+            android:background="@drawable/background_white_end_curved"
+            >
+
+            <ImageView
+                android:id="@+id/iv_recent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/ic_recent"
+                app:tint="@color/color_GreyText"
+                />
+
+            <TextView
+                android:id="@+id/tv_recent_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/iv_recent"
+                app:layout_constraintTop_toTopOf="@id/iv_recent"
+                app:layout_constraintBottom_toBottomOf="@id/iv_recent"
+                android:layout_marginStart="8dp"
+                android:text="Recent Search"
+                android:textSize="16sp"
+                android:textColor="@color/color_GreyText"
+                android:textAllCaps="true"
+                android:fontFamily="@font/roboto_medium"
+                />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_recent_searches"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/tv_recent_search"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_recent_search"
+                android:layout_marginTop="16dp"
+                app:cardElevation="4dp"
+                app:cardCornerRadius="32dp"
+                app:contentPadding="8dp"
+                android:clipToPadding="false"
+                android:backgroundTint="@color/color_LightGrey"
+                >
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_searches"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/color_LightGrey"
+                    android:visibility="gone"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_no_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textColor="@color/color_GreyText"
+                    android:text="No Recent Searches"
+                    android:textAllCaps="true"
+                    />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <View
+                android:id="@+id/iv_word_of_the_day"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_recent_searches"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/bg_pink_circle"
+                app:tint="@color/color_GreyText"
+                />
+
+            <TextView
+                android:id="@+id/tv_word_of_the_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/iv_word_of_the_day"
+                app:layout_constraintTop_toTopOf="@id/iv_word_of_the_day"
+                app:layout_constraintBottom_toBottomOf="@id/iv_word_of_the_day"
+                android:layout_marginStart="8dp"
+                android:text="Word of the day"
+                android:textSize="16sp"
+                android:textColor="@color/color_GreyText"
+                android:textAllCaps="true"
+                android:fontFamily="@font/roboto_medium"
+                />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_word_of_the_day"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_word_of_the_day"
+                android:layout_marginTop="16dp"
+                app:cardElevation="8dp"
+                app:cardCornerRadius="32dp"
+                app:contentPadding="16dp"
+                android:backgroundTint="@color/white"
+                >
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_word_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        >
+
+                        <TextView
+                            android:id="@+id/tv_word"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:text="Vietnam"
+                            android:textSize="26sp"
+                            android:textColor="@color/color_BlackText"
+                            android:fontFamily="@font/roboto_bold"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_abbr"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_word"
+                            android:text="Vietnam"
+                            android:textSize="16sp"
+                            android:textColor="@color/color_BlackText"
+                            android:fontFamily="@font/roboto_medium"
+                            />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_meaning"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_abbr"/>
+
+                        <TextView
+                            android:id="@+id/tv_license"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/rv_meaning"
+                            android:layout_marginTop="16dp"
+                            android:text="License"
+                            android:textSize="16sp"
+                            android:textColor="@color/color_BlackText"
+                            android:fontFamily="@font/roboto_mediumitalic"
+                            />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/shimmer_word_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:shimmer_auto_start="true"
+                        app:shimmer_duration="2000"
+                        app:shimmer_direction="left_to_right"
+                        app:shimmer_repeat_delay="1000"
+                        app:shimmer_repeat_mode="restart"
+                        app:shimmer_intensity="0.5"
+                        android:visibility="visible">
+
+                        <include layout="@layout/shimmer_li_word" />
+
+                    </com.facebook.shimmer.ShimmerFrameLayout>
+
+                </FrameLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

@@ -1,7 +1,9 @@
 package com.codedev.base._di
 
 import android.content.Context
-import com.codedev.data_lib.repositories.interfaces.IVideoRepository
+import com.codedev.data_lib.repositories.interfaces.MainRepository
+import com.codedev.room_lib.DictionaryDatabase
+import com.codedev.utils_lib.PreferenceManager
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -12,7 +14,9 @@ import javax.inject.Singleton
 @Singleton
 interface BaseFeatureComponent {
 
-    fun getVideoRepository(): IVideoRepository
+    fun getDictionaryDatabase(): DictionaryDatabase
+    fun getPreferencesStore(): PreferenceManager
+    fun getMainRepository(): MainRepository
 
     @Component.Builder
     interface Builder {

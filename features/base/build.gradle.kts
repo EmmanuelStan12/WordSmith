@@ -59,8 +59,11 @@ dependencies {
     api(project(mapOf("path" to ":libraries:room-lib")))
     api(project(mapOf("path" to ":libraries:context-provider-lib")))
     api(project(mapOf("path" to ":libraries:data-lib")))
+    api(project(mapOf("path" to ":libraries:utils-lib")))
 
     api(Dependencies.dagger)
     kapt(Dependencies.dagger_kapt)
+
+    api(Dependencies.shimmer)
 
 }

@@ -1,26 +1,26 @@
 package com.codedev.data_lib
 
-import com.codedev.data_lib.content_provider.ContentProviderVideo
-import com.codedev.data_lib.models.Query
-import com.codedev.data_lib.models.Video
-import com.codedev.room_lib.models.QueryEntity
-import com.codedev.room_lib.models.VideoEntity
-import java.util.Date
+import com.codedev.data_lib.models.Definition
+import com.codedev.data_lib.models.Meaning
+import com.codedev.data_lib.models.Phonetic
+import com.codedev.data_lib.models.Word
+import com.codedev.room_lib.models.DefinitionEntity
+import com.codedev.room_lib.models.MeaningEntity
+import com.codedev.room_lib.models.PhoneticEntity
+import com.codedev.room_lib.models.WordEntity
 
-fun VideoEntity.toVideo() = Video(
-    id, name, duration, size, lastStop, null, lastAccessed, folder, path
+fun MeaningEntity.toMeaning() = Meaning(
+    meaning_id, part_of_speech, meaning_antonyms, meaning_synonyms
 )
 
-fun Video.toVideoEntity() = VideoEntity(
-    id, name, duration, size, lastStop, lastAccessed, folder, path
+fun WordEntity.toWord() = Word(
+    word_id, name, phonetic, license, origin, source_urls
 )
 
-fun ContentProviderVideo.toVideoEntity() = VideoEntity(
-    id, name, duration, size, 0, Date(), folder, path
+fun DefinitionEntity.toDefinition() = Definition(
+    definition_id, definition_example, definition_antonyms, definition_synonyms, definition, meaning_id
 )
 
-fun QueryEntity.toQuery() = Query(title, type, true)
-
-fun Query.toQueryEntity() = QueryEntity(title, type)
-
-fun VideoEntity.toQuery() = Query(title = name, type = "video", false)
+fun PhoneticEntity.toPhonetic() = Phonetic(
+    phonetic_id, text, audio, word_id, source_url
+)

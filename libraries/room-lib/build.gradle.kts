@@ -43,4 +43,5 @@ dependencies {
 
     implementation(Dependencies.dagger)
     kapt(Dependencies.dagger_kapt)
+    implementation(Dependencies.datastore)
 }

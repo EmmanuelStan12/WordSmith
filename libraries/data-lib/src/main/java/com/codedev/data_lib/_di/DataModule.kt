@@ -1,9 +1,9 @@
 package com.codedev.data_lib._di
 
-import com.codedev.data_lib.repositories.VideoRepositoryImpl
-import com.codedev.data_lib.repositories.interfaces.IVideoRepository
-import com.codedev.room_lib.dao.QueryDao
-import com.codedev.room_lib.dao.VideoDao
+import com.codedev.data_lib.repositories.MainRepositoryImpl
+import com.codedev.data_lib.repositories.interfaces.MainRepository
+import com.codedev.room_lib.dao.MeaningDao
+import com.codedev.room_lib.dao.WordDao
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -13,10 +13,10 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun provideVideoRepository(
-        queryDao: QueryDao,
-        videoDao: VideoDao,
-    ): IVideoRepository {
-        return VideoRepositoryImpl(videoDao, queryDao)
+    fun provideMainRepository(
+        wordDao: WordDao,
+        meaningDao: MeaningDao
+    ): MainRepository {
+        return MainRepositoryImpl(wordDao, meaningDao)
     }
 }

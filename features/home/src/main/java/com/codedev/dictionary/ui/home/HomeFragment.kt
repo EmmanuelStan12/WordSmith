@@ -1,15 +1,23 @@
 package com.codedev.dictionary.ui.home
 
+import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import com.codedev.base.toggleVisibility
+import com.codedev.data_lib.models.Word
+import com.codedev.dictionary.HomeActivity
+import com.codedev.dictionary.ui.home._di.HomeFeatureComponent
+import com.codedev.home.R
 import com.codedev.home.databinding.FragmentHomeBinding
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private var _binding: FragmentHomeBinding? = null
 
@@ -17,23 +25,74 @@ class HomeFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+    lateinit var homeFeatureComponent: HomeFeatureComponent
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+    @Inject
+    lateinit var homeViewModel: HomeViewModel
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+    /*private val viewModel: HomeViewModel by lazy {
+        ViewModelProvider((requireActivity() as HomeActivity).viewModelStore,viewModelFactory)[HomeViewModel::class.java]
+    }*/
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        homeFeatureComponent = (requireActivity() as HomeActivity).homeComponent
+            .homeFeatureComponent()
+            .fragment(this)
+            .build()
+
+        homeFeatureComponent.inject(this)
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        _binding = FragmentHomeBinding.bind(view)
+
+        initData()
+        initViews()
+    }
+
+    private fun initViews() {
+        binding.etSearch.setDropDownBackgroundResource(com.codedev.base.R.drawable.background_search_edit_text)
+    }
+
+    private fun initData() {
+
+        homeViewModel.execute(HomeFragmentActions.GetRandomWord)
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    homeViewModel.events.collectLatest { event ->
+                        when (event) {
+                            is HomeFragmentUIEvents.LoadingStarted -> {
+                                binding.clWordContent.toggleVisibility(false)
+                                binding.shimmerWordContent.toggleVisibility(true)
+                            }
+                            HomeFragmentUIEvents.LoadingStopped -> {
+                                binding.clWordContent.toggleVisibility(true)
+                                binding.shimmerWordContent.toggleVisibility(false)
+                            }
+                        }
+                    }
+                }
+
+                launch {
+                    homeViewModel.randomWord.collectLatest { word ->
+                        if (word != null) {
+                            setWordContent(word)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun setWordContent(word: Word) {
+        binding.tvWord.text = word.name
+        binding.tvAbbr.text = word.phonetic
+        binding.tvLicense.text = word.license
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

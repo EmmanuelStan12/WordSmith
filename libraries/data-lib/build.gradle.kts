@@ -38,6 +38,8 @@ dependencies {
 
     implementation(Dependencies.core)
     implementation(Dependencies.coroutinecore)
+    implementation(Dependencies.gson)
+    implementation(Dependencies.timber)
 
     implementation(project(mapOf("path" to ":libraries:room-lib")))
 

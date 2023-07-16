@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_primary"
+        android:paddingTop="16dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:paddingBottom="32dp"
+            android:background="@drawable/background_pink_start_curved"
+            >
+
+            <TextView
+                android:id="@+id/tv_word"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="Vietnam"
+                android:textSize="26sp"
+                android:textColor="@color/color_WhiteText"
+                android:fontFamily="@font/roboto_bold"
+                />
+
+            <TextView
+                android:id="@+id/tv_abbr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_word"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="Vietnam"
+                android:textSize="16sp"
+                android:textColor="@color/color_semi_WhiteText"
+                android:fontFamily="@font/roboto_medium"
+                />
+
+            <LinearLayout
+                android:id="@+id/l_speak"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_abbr"
+                app:layout_constraintEnd_toStartOf="@id/l_favourite"
+                android:layout_marginTop="16dp"
+                android:padding="16dp"
+                android:background="@drawable/background_black_curved_rectangle"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:orientation="vertical"
+                android:gravity="center"
+                >
+
+                <ImageView
+                    android:id="@+id/iv_speak"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_sound"
+                    app:tint="@color/color_WhiteText" />
+
+                <TextView
+                    android:id="@+id/tv_sound_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="Speak"
+                    android:textSize="16sp"
+                    android:textColor="@color/color_WhiteText"
+                    android:fontFamily="@font/roboto_medium"
+                    />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/l_favourite"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/l_speak"
+                app:layout_constraintTop_toTopOf="@id/l_speak"
+                app:layout_constraintEnd_toStartOf="@id/l_copy"
+                android:padding="16dp"
+                android:background="@drawable/background_black_curved_rectangle"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:orientation="vertical"
+                android:gravity="center"
+                >
+
+                <ImageView
+                    android:id="@+id/iv_favourite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_favorite_outlined"
+                    app:tint="@color/color_WhiteText" />
+
+                <TextView
+                    android:id="@+id/tv_favourite_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="Save"
+                    android:textSize="16sp"
+                    android:textColor="@color/color_WhiteText"
+                    android:fontFamily="@font/roboto_medium"
+                    />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/l_copy"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/l_favourite"
+                app:layout_constraintTop_toTopOf="@id/l_speak"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:padding="16dp"
+                android:background="@drawable/background_black_curved_rectangle"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:orientation="vertical"
+                android:gravity="center"
+                >
+
+                <ImageView
+                    android:id="@+id/iv_copy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_copy"
+                    app:tint="@color/color_WhiteText" />
+
+                <TextView
+                    android:id="@+id/tv_copy_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="Copy"
+                    android:textSize="16sp"
+                    android:textColor="@color/color_WhiteText"
+                    android:fontFamily="@font/roboto_medium"
+                    />
+
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_header"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:clipToPadding="false"
+            android:background="@drawable/background_white_end_curved"
+            >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_meaning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/tv_license"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rv_meaning"
+                android:layout_marginTop="16dp"
+                android:text="License"
+                android:textSize="16sp"
+                android:textColor="@color/color_BlackText"
+                android:fontFamily="@font/roboto_mediumitalic"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

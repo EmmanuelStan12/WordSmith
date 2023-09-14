@@ -2,8 +2,7 @@ package com.codedev.dictionary.di
 
 import com.codedev.base._di.BaseFeatureComponent
 import com.codedev.dictionary.HomeActivity
-import com.codedev.dictionary.ui.home._di.HomeFeatureComponent
-import com.codedev.dictionary.ui.home._di.HomeFragmentScope
+import com.codedev.dictionary.ui.word_result.di.WordResultComponent
 import dagger.Component
 
 @Component(
@@ -21,6 +20,6 @@ interface HomeComponent {
 
     fun inject(activity: HomeActivity)
 
-    fun homeFeatureComponent(): HomeFeatureComponent.Builder
+    fun wordResultComponent(): WordResultComponent.Builder
 
 }

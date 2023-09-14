@@ -1,8 +1,8 @@
-package com.codedev.dictionary.ui.home._di
+package com.codedev.dictionary.ui.word_result.di
 
 import javax.inject.Scope
 
 @Scope
 @MustBeDocumented
 @Retention(AnnotationRetention.RUNTIME)
-annotation class HomeFragmentScope
+annotation class WordResultFragmentScope

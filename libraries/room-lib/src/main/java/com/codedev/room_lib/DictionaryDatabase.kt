@@ -4,33 +4,37 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.codedev.room_lib.converters.TimestampConverter
 import com.codedev.room_lib.dao.DefinitionDao
+import com.codedev.room_lib.dao.HistoryDao
 import com.codedev.room_lib.dao.MeaningDao
 import com.codedev.room_lib.dao.PhoneticDao
 import com.codedev.room_lib.dao.WordDao
 import com.codedev.room_lib.models.DefinitionEntity
+import com.codedev.room_lib.models.HistoryEntity
 import com.codedev.room_lib.models.MeaningEntity
 import com.codedev.room_lib.models.PhoneticEntity
 import com.codedev.room_lib.models.WordEntity
 import com.codedev.room_lib.utils.DictionaryFileLoader
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 
-@Database(entities = [DefinitionEntity::class, MeaningEntity::class, PhoneticEntity::class, WordEntity::class], version = 1)
+@Database(entities = [DefinitionEntity::class, MeaningEntity::class, PhoneticEntity::class, WordEntity::class, HistoryEntity::class], version = 4, exportSchema = false)
+@TypeConverters(TimestampConverter::class)
 abstract class DictionaryDatabase: RoomDatabase() {
 
     abstract fun getWordDao(): WordDao
     abstract fun getPhoneticDao(): PhoneticDao
     abstract fun getMeaningDao(): MeaningDao
     abstract fun getDefinitionDao(): DefinitionDao
+    abstract fun getHistoryDao(): HistoryDao
 
     companion object {
         private var instance: DictionaryDatabase? = null
@@ -49,13 +53,14 @@ abstract class DictionaryDatabase: RoomDatabase() {
                 context,
                 DictionaryDatabase::class.java,
                 "words_db"
-            )
+            ).fallbackToDestructiveMigration()
 
             return databaseBuilder.build()
         }
 
         suspend fun performInitialDBOperations(database: DictionaryDatabase, context: Context): Pair<Exception?, Boolean> = withContext(Dispatchers.IO) {
-                val items = withContext(Dispatchers.Default) {
+            instance?.clearAllTables()
+            val items = withContext(Dispatchers.Default) {
                     instance?.getWordDao()?.getWords(1)
                 }
                 if (!items.isNullOrEmpty()) {
@@ -63,12 +68,12 @@ abstract class DictionaryDatabase: RoomDatabase() {
                 }
 
                 try {
-                    val wordCSV = async { DictionaryFileLoader.loadCSVFromAsset<WordEntity>("word.csv", context) }
-                    val phoneticCSV = async { DictionaryFileLoader.loadCSVFromAsset<PhoneticEntity>("phonetic.csv", context) }
-                    val meaningCSV = async { DictionaryFileLoader.loadCSVFromAsset<MeaningEntity>("meaning.csv", context) }
-                    val definitionCSV = async { DictionaryFileLoader.loadCSVFromAsset<DefinitionEntity>("definition.csv", context) }
+                    val wordJson = async { DictionaryFileLoader.loadJSONFromAsset<WordEntity>("word.json", context) }
+                    val phoneticJson = async { DictionaryFileLoader.loadJSONFromAsset<PhoneticEntity>("phonetic.json", context) }
+                    val meaningJson = async { DictionaryFileLoader.loadJSONFromAsset<MeaningEntity>("meaning.json", context) }
+                    val definitionJson = async { DictionaryFileLoader.loadJSONFromAsset<DefinitionEntity>("definition.json", context) }
 
-                    val result = awaitAll(wordCSV, phoneticCSV, meaningCSV, definitionCSV)
+                    val result = awaitAll(wordJson, phoneticJson, meaningJson, definitionJson)
 
                     val words: List<WordEntity>? = result[0] as? List<WordEntity>
                     val phonetics: List<PhoneticEntity>? = result[1] as? List<PhoneticEntity>

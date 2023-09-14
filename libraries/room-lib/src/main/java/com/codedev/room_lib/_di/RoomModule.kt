@@ -3,6 +3,7 @@ package com.codedev.room_lib._di
 import android.content.Context
 import com.codedev.room_lib.DictionaryDatabase
 import com.codedev.room_lib.dao.DefinitionDao
+import com.codedev.room_lib.dao.HistoryDao
 import com.codedev.room_lib.dao.MeaningDao
 import com.codedev.room_lib.dao.PhoneticDao
 import com.codedev.room_lib.dao.WordDao
@@ -35,5 +36,10 @@ object RoomModule {
     @Provides
     fun provideDefinitionDao(database: DictionaryDatabase): DefinitionDao {
         return database.getDefinitionDao()
+    }
+
+    @Provides
+    fun provideHistoryDao(database: DictionaryDatabase): HistoryDao {
+        return database.getHistoryDao()
     }
 }

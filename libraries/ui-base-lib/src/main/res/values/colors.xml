@@ -29,5 +29,6 @@
     <color name="color_SurfaceLight">#FFFFFF</color>
     <color name="color_SurfaceDark">#FFFFFF</color>
     <color name="color_OnSurface">#FFFFFF</color>
-    <color name="color_LightGrey">#D3D3D3</color>
+    <color name="color_LightGrey">#EFEFEF</color>
+    <color name="color_LightGrey_30">#4DEFEFEF</color>
 </resources>

@@ -46,7 +46,6 @@ android {
 
 dependencies {
     api(Dependencies.core)
-    api(Dependencies.constraintlayout)
     api(Dependencies.material)
     api(Dependencies.appcompat)
     api(Dependencies.timber)

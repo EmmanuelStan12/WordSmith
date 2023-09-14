@@ -7,32 +7,14 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-const val TIME_STAMP_FORMAT = "yyyy-MM-dd HH:mm:ss"
-
 class TimestampConverter {
-    private val df: DateFormat = SimpleDateFormat(TIME_STAMP_FORMAT, Locale.US)
-
     @TypeConverter
-    fun fromTimestamp(value: String?): Date? {
-        if (value != null) {
-            try {
-                return df.parse(value)
-            } catch (e: ParseException) {
-                e.printStackTrace()
-            }
-        }
-        return null
+    fun fromTimestamp(value: Long?): Date? {
+        return if (value == null) null else Date(value)
     }
 
     @TypeConverter
-    fun toTimestamp(value: Date?): String? {
-        if (value != null) {
-            try {
-                return df.format(value)
-            } catch (e: ParseException) {
-                e.printStackTrace()
-            }
-        }
-        return null
+    fun dateToTimestamp(date: Date?): Long? {
+        return date?.time
     }
 }

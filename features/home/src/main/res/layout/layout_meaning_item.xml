@@ -4,43 +4,69 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingBottom="8dp">
 
     <TextView
         android:id="@+id/tv_part_of_speech"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="16dp"
-        android:text="Noun"
-        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Definitions"
         android:textColor="@color/color_BlackText"
         android:fontFamily="@font/roboto_medium"
+        android:textSize="20sp"
         />
 
     <TextView
         android:id="@+id/tv_word"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_part_of_speech"
+        app:layout_constraintStart_toStartOf="@id/tv_part_of_speech"
+        tools:text="Definitions"
+        android:textColor="@color/color_BlackText"
+        android:fontFamily="@font/roboto_italic"
+        android:textSize="18sp"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_definitions"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_part_of_speech"
-        android:text="Word"
-        android:textSize="16sp"
-        android:textColor="@color/color_BlackText"
-        android:fontFamily="@font/roboto_mediumitalic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_word"
+        android:layout_marginTop="8dp"
+        android:paddingStart="32dp"
+        tools:listitem="@layout/layout_definition_item"
         />
 
     <TextView
-        android:id="@+id/tv_definitions"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_meaning_synonyms"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_word"
-        android:text="Word"
-        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/rv_definitions"
+        app:layout_constraintStart_toStartOf="@id/tv_part_of_speech"
+        android:layout_marginTop="8dp"
+        tools:text="Synonyms"
         android:textColor="@color/color_BlackText"
-        android:fontFamily="@font/roboto_medium"
+        android:fontFamily="@font/roboto_italic"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_meaning_antonyms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_meaning_synonyms"
+        app:layout_constraintStart_toStartOf="@id/tv_part_of_speech"
+        android:layout_marginTop="4dp"
+        tools:text="Antonyms"
+        android:textColor="@color/color_BlackText"
+        android:fontFamily="@font/roboto_italic"
+        android:textSize="18sp"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

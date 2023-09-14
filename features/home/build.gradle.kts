@@ -50,4 +50,7 @@ dependencies {
     implementation(project(mapOf("path" to ":features:base")))
     kapt(Dependencies.dagger_kapt)
     addTestDependencies()
+    implementation(Dependencies.exoplayer_ui)
+    implementation(Dependencies.exoplayer_core)
+    implementation(Dependencies.exoplayer_dash)
 }

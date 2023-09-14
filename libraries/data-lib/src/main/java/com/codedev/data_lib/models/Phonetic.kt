@@ -7,6 +7,6 @@ data class Phonetic(
     val phonetic_id: Int? = null,
     val text: String,
     val audio: String,
-    val word_id: Int? = null,
+    val word: String,
     val source_url: String
 )

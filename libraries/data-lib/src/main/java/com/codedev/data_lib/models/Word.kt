@@ -4,12 +4,13 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 data class Word(
-    val word_id: Int? = null,
-    val name: String? = null,
+    val name: String,
     val phonetic: String,
     val license: String,
     val origin: String,
     val source_urls: String,
+    val is_saved: Boolean = false,
+    val audio: String = ""
 ) {
     var meanings: List<Meaning>? = null
         private set
@@ -20,7 +21,7 @@ data class Word(
         this.meanings = meanings
     }
 
-    fun setPhonetics(phonetic: List<Phonetic>) {
+    fun setPhonetics(phonetics: List<Phonetic>) {
         this.phonetics = phonetics
     }
 }

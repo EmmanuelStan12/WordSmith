@@ -17,7 +17,13 @@ interface MeaningDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMeanings(items: List<MeaningEntity>)
 
-    @Query("select * from meaning m inner join definition d on d.meaning_id = m.meaning_id where m.word_id = :wordId")
-    suspend fun getDefinitionsWithMeaning(wordId: Int): Map<MeaningEntity, List<DefinitionEntity>>
+    @Query("select * from meaning m inner join definition d on d.meaning_id = m.meaning_id where m.word = :name")
+    suspend fun getDefinitionsWithMeaning(name: String): Map<MeaningEntity, List<DefinitionEntity>>
+
+    @Query("select * from definition d where d.meaning_id = :meaningId")
+    suspend fun getDefinitionsWithMeaningId(meaningId: Int): List<DefinitionEntity>
+
+    @Query("select * from definition")
+    fun getDefinitions(): List<DefinitionEntity>
 
 }

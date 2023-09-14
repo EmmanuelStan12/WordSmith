@@ -8,12 +8,12 @@ data class Meaning(
     val part_of_speech: String,
     val meaning_antonyms: String,
     val meaning_synonyms: String,
-    val word_id: Int? = null
+    var word: String? = null
 ) {
     var definitions: List<Definition>? = null
         private set
 
-    fun setDefinitions(definition: List<Definition>) {
+    fun setDefinitions(definitions: List<Definition>) {
         this.definitions = definitions
     }
 }

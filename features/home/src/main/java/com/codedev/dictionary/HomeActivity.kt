@@ -57,20 +57,6 @@ class HomeActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-        val callback: OnBackPressedCallback =
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    if (navController.backQueue.size > 1) {
-                        navController.navigateUp()
-                    } else {
-                        navController.navigate(R.id.action_to_exit_fragment)
-                    }
-                    Timber.e("BackQueue -> ${navController.backQueue.size}")
-                }
-            }
-        onBackPressedDispatcher.addCallback(this, callback)
-
     }
 
     private fun initDI() {

@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.codedev.base.addBackPressedDispatcher
 import com.codedev.base.launchInLifecycle
 import com.codedev.dictionary.ui.common.RVHistoryAdapter
 import com.codedev.base.toggleVisibility
@@ -126,6 +127,8 @@ class HomeFragment : Fragment(home_R.layout.fragment_home) {
     }
 
     private fun initData() {
+        addBackPressedDispatcher(home_R.id.action_to_exit_fragment)
+
         viewModel = (requireActivity() as HomeActivity).mainViewModel
 
         viewModel.execute(HomeFragmentActions.GetRandomWord)

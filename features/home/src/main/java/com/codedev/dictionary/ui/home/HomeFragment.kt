@@ -121,9 +121,10 @@ class HomeFragment : Fragment(home_R.layout.fragment_home) {
     }
 
     private fun updateSearchDropdown(words: List<String>) {
+        Timber.e("words -> ${words.toString()}")
         searchAdapter.clear()
         searchAdapter.addAll(words)
-        searchAdapter.notifyDataSetChanged()
+        searchAdapter.filter.filter(binding.etSearch.text, binding.etSearch);
     }
 
     private fun initData() {

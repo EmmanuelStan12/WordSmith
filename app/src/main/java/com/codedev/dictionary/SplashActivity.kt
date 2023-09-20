@@ -1,13 +1,9 @@
 package com.codedev.dictionary
 
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
@@ -31,7 +27,11 @@ class SplashActivity : FragmentActivity() {
         }
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.layout_splash)
+        setContentView(R.layout.activity_splash)
+
+        val dialog = ProgressDialogFragment()
+
+        dialog.show(supportFragmentManager, ProgressDialogFragment::class.java.simpleName)
 
         lifecycleScope.launchWhenCreated {
             val database = (applicationContext as BaseApplication).provideBaseComponent()
@@ -39,6 +39,7 @@ class SplashActivity : FragmentActivity() {
             val (exception, isSuccess) = DictionaryDatabase.performInitialDBOperations(database, applicationContext)
 
             if (isSuccess) {
+                dialog.dismissNow()
                 launchHomeActivity()
             }
         }

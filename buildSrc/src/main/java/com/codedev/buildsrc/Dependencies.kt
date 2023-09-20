@@ -8,7 +8,7 @@ object Dependencies {
     val versionCode = 1
     val versionName = "1.0.0"
 
-    const val isMinifyEnabled = false
+    const val isMinifyEnabled = true
     val isShrinkEnabled = false
 
     val kotlin_v = "1.7.10"

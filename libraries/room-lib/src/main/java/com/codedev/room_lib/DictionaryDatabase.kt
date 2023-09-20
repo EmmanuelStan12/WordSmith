@@ -59,7 +59,7 @@ abstract class DictionaryDatabase: RoomDatabase() {
         }
 
         suspend fun performInitialDBOperations(database: DictionaryDatabase, context: Context): Pair<Exception?, Boolean> = withContext(Dispatchers.IO) {
-            instance?.clearAllTables()
+//            instance?.clearAllTables()
             val items = withContext(Dispatchers.Default) {
                     instance?.getWordDao()?.getWords(1)
                 }
